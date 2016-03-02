@@ -1,0 +1,15 @@
+<html>
+	<head>
+		<title>Duplication report</title>
+	</head>
+	<body>
+		<h3>Duplicate entry</h3>
+		{%for duplicate_file in duplicates%}
+		<ul>
+		{%for s in duplicate_file[1]%}
+			<li>{{s}}</li>
+		{% endfor %}
+		</ul>
+		{% endfor %}
+	</body>
+</html>

@@ -19,6 +19,11 @@ RUN adduser --quiet jenkins \
 	&& echo "jenkins:jenkins" | chpasswd
 
 RUN mkdir /home/jenkins/setup
+RUN mkdir /opt/static-analysis
+
+COPY analyzer.rb /opt/static-analysis
+COPY report_usage_analysis_template.html /opt/static-analysis
+COPY report_duplication_analysis_template.html /opt/static-analysis
 
 WORKDIR /home/jenkins/setup
 
@@ -26,6 +31,7 @@ RUN wget https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz \
 	&& tar -xzf ruby-2.3.0.tar.gz \
 	&& ./ruby-2.3.0/configure  \
 	&& make install \
+	&& gem install docopt \
 	&& gem install github-pages -v 51
 
 WORKDIR /home/jenkins 
