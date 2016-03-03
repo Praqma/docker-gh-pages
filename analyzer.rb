@@ -100,14 +100,12 @@ def scan_usage(resources, dir)
 	end
 
 	mapped_files = Hash[unique_files.collect { |x| [x,false] }]
-	puts "Mapped files #{mapped_files}"
 	#For each unique file name...see if they are referenced anywhere in the source
   unique_files.each do |check_file|
   	name = check_file.split(':')[0]
   	has_filename = false
 		files_to_scan.each do |scan_file|
-			has_filename ||= File.readlines(scan_file).grep(eval("/#{name}/")).any?
-
+			has_filename ||= File.readlines(scan_file, :encoding => 'utf-8').grep(eval("/#{name}/")).any?
 		end
 		mapped_files[check_file] = has_filename
   end	
@@ -140,6 +138,14 @@ OptionParser.new do |opts|
 
 	opts.on("-sSOURCE", "--source=SOURCE", "Source folder") do |s|
 		options[:source] = s
+	end
+
+	opts.on("-uUNUSED","--unused=UNUSED", "Template file for the unused resource scanner") do |u|
+		options[:template_usage] = u
+	end
+
+	opts.on("-cCOPIES","--copies=COPIES", "Template file for the duplicate resource scanner") do |i|
+		options[:template_duplication] = i
 	end
 end.parse!
 
