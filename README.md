@@ -8,7 +8,7 @@ Once the image has been pulled or built. You can run it like so:
 
 With the image, you can mount a website into your container and serve it using `jekyll` like so:
 
-	docker run -i -t -v /home/user/mysite:/home/jenkins praqma/gh-pages jekyll server --watch
+	docker run -i -t -v /home/user/mysite:/home/jenkins praqma/gh-pages jekyll serve --watch
 
 If that runs. Congratulations!
 
