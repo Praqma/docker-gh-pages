@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/rubyunsused_resouces_report
 
 require 'digest/md5'
 require 'liquid'
@@ -6,8 +6,8 @@ require 'optparse'
 
 options = {
 	:strict => false,
-	:template_usage => 'report_usage_analysis_template.html',
-	:template_duplication => 'report_duplication_analysis_template.html',
+	:template_usage => 'report_usage_analysis_junit_template.xml',
+	:template_duplication => 'report_duplication_junit_template.xml',
 	:destination => '.',
 	:source => '.'
 }
@@ -94,7 +94,7 @@ def scan_usage(resources, dir)
 
 	#The text files to look for the references
 	files_to_scan = []
-	extensions = ['.html','.html','.md']
+	extensions = ['.html','.md']
 	extensions.each do |ext|
 		files_to_scan += Dir.glob("#{dir}/**/*#{ext}", File::FNM_DOTMATCH)
 	end
@@ -114,14 +114,14 @@ def scan_usage(resources, dir)
 end
 
 def unsused_resouces_report(files, dest, template) 
-	File.open("#{dest}/report_analysis_unused.html",'w:UTF-8') do |f| 		
- 		f << Liquid::Template.parse(File.read(template)).render('unused' => files)
+	File.open("#{dest}/report_analysis_unused.xml",'w:UTF-8') do |f| 		
+ 		f << Liquid::Template.parse(File.read(template)).render('unused' => files.map { |k,v| [k.to_s,v] })
 	end	
 end
 
 def duplication_report(files, dest, template)	
-	File.open("#{dest}/report_duplication_analysis.html",'w:UTF-8') do |f| 		
- 		f << Liquid::Template.parse(File.read(template)).render('duplicates' => files)
+	File.open("#{dest}/report_duplication_analysis.xml",'w:UTF-8') do |f| 		
+ 		f << Liquid::Template.parse(File.read(template)).render('duplicates' => files.map { |k,v| [k.to_s,v] })
 	end
 end
 

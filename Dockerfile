@@ -21,9 +21,12 @@ RUN adduser --quiet jenkins \
 RUN mkdir /home/jenkins/setup
 RUN mkdir /opt/static-analysis
 
+RUN chown -R jenkins:jenkins -R /home/jenkins
+
 COPY analyzer.rb /opt/static-analysis
-COPY report_usage_analysis_template.html /opt/static-analysis
-COPY report_duplication_analysis_template.html /opt/static-analysis
+COPY report_usage_analysis_junit_template.xml /opt/static-analysis
+COPY report_duplication_junit_template.xml /opt/static-analysis
+
 
 WORKDIR /home/jenkins/setup
 
