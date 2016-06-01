@@ -8,9 +8,9 @@ Once the image has been pulled or built. You can run it like so:
 
 With the image, you can mount a website into your container and serve it using `jekyll` like so:
 
-	docker run -i -t -v /home/user/mysite:/home/jenkins praqma/gh-pages jekyll serve --watch --host=0.0.0.0
+	docker run -i -t -v /home/user/mysite:/home/jenkins -p 4444:4000 praqma/gh-pages jekyll serve --watch --host=0.0.0.0 
 
-If that runs. Congratulations!
+If that runs. Congratulations! Your site is now served on locahost:4444
 
 The image also includes a tool that can scan a website for duplicate resources:
 	
