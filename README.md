@@ -1,3 +1,29 @@
+# GitHub Pages
+
+`Short decription:`
+
+An image the follows GitHub's implementation og Jekyll
+
+`Long description:`
+
+## GitHub Pages
+
+GitHub pages is essentially a closed box - GitHub don't tell us what versions of Jekylll, Liquid, KramDown etc. they are running.
+
+An then again, they actually do!
+
+The [pages-gem](https://github.com/github/pages-gem) for Ruby is maintained by GitHub and is at all times in sync with the version running on GitHub pages.
+
+The main purpose of this Docker image here, is to provide a Docker image, that resembles the GitHub pages. By using this immage to test your pages, it should be fair to expect that they will behave the same when published to GitHub pages.
+
+The image is maintained by [Praqma](https://github.com/Praqma/docker-gh-pages)
+
+---
+
+Available at https://hub.docker.com/r/praqma/gh-pages/
+
+---
+
 ## Quickstart
 
 Once you've built the image. You'll be able to server pages using the `jekyll` gem. 
