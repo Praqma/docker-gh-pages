@@ -38,15 +38,29 @@ With the image, you can mount a website into your container and serve it using `
 
 If that runs. Congratulations! Your site is now served on locahost:4444
 
-The image also includes a tool that can scan a website for duplicate resources:
+The image also includes a tool that can scan a website for duplicate resources. By default it generates junit xml files which can be parsed by other tools.
+
+From the source binary:	
 	
-	ruby /opt/static-analysis/analyzer.rb -c /opt/static-analysis/report_duplication_analysis_template.html -u /opt/static-analysis/report_usage_analysis_template.html
+	cd <install_dir>
+	ruby analyzer.rb -s /home/user/projects/yoursite/ 
 
-That will produce two analysis files in your current working directory. You can see the list of available options like so: 
+From the docker container:
 
-	ruby /opt/static-analysis/analyzer.rb --help
+	docker run --rm -it --workdir='/site' -v /home/user/projects/yoursite/:/site praqma/gh-pages analyzer
 
-That's it for now
+Both of these commands will produce two reports in your current working directory
+
+You can see the list of available options like so. 
+	
+	cd <install_dir>
+	ruby analyzer.rb --help
+
+Or from docker:
+
+	docker run --rm -it praqma/gh-pages analyzer --help
+
+That about covers it.
 	
 
 

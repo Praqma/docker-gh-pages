@@ -1,19 +1,18 @@
-#!/usr/bin/rubyunsused_resouces_report
+#!/usr/local/bin/ruby
 
 require 'digest/md5'
 require 'liquid'
 require 'optparse'
 
 options = {
-	:strict => false,
-	:template_usage => 'report_usage_analysis_junit_template.xml',
-	:template_duplication => 'report_duplication_junit_template.xml',
+	:strict => false,	
+	:template_usage => File.exist?('/.dockerenv') ? '/opt/static-analysis/report_usage_analysis_junit_template.xml' : 'report_usage_analysis_junit_template.xml',
+	:template_duplication => File.exist?('/.dockerenv') ? '/opt/static-analysis/report_duplication_junit_template.xml' : 'report_duplication_junit_template.xml',
 	:destination => '.',
 	:source => '.'
 }
 
 def analyze(options)
-
 	#Obtain a list of files to analyze. The resources we want to check for duplication
 	a_files = list_files(options[:source])
 
@@ -120,7 +119,7 @@ def unsused_resouces_report(files, dest, template)
 end
 
 def duplication_report(files, dest, template)	
-	File.open("#{dest}/report_duplication_analysis.xml",'w:UTF-8') do |f| 		
+	File.open("#{dest}/report_duplication_analysis.xml",'w:UTF-8') do |f|
  		f << Liquid::Template.parse(File.read(template)).render('duplicates' => files.map { |k,v| [k.to_s,v] })
 	end
 end
@@ -128,8 +127,8 @@ end
 
 OptionParser.new do |opts|
 	opts.banner = "Usage: analysis.rb [options]"
-	opts.on("-s", "--[no-]strict", "Run strictly, exit nonzero when analysis warnings are found") do |o|
-		options[:strict] = o
+	opts.on("-f", "--[no-]fail", "Run strictly, exit nonzero when analysis warnings are found") do |f|
+		options[:strict] = f
 	end
 
 	opts.on("-dDESTINATION", "--destination=DESTINATION", "Output destination") do |d|
