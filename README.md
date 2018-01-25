@@ -1,12 +1,19 @@
 # GitHub Pages
 
-`Short decription:`
+## **Deprecated**
+
+This repository was deprecated and marked as obselete.
+
+Use automated built [jekyll](https://cloud.docker.com/app/praqma/repository/docker/praqma/jekyll/general) Docker images.
+The [jekyll](https://github.com/praqma/jekyll) repository was based on the works of this repository.
+
+## Description
+
+`Short description:`
 
 An image the follows GitHub's implementation og Jekyll
 
 `Long description:`
-
-## GitHub Pages
 
 GitHub pages is essentially a closed box - GitHub don't tell us what versions of Jekylll, Liquid, KramDown etc. they are running.
 
