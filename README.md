@@ -1,6 +1,6 @@
 # GitHub Pages
 
-## Deprecated Repository
+## **Deprecated**
 
 This repository was deprecated and marked as obselete.
 
